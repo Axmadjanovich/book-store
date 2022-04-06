@@ -8,16 +8,16 @@ import java.sql.SQLException;
 public class AuthorRepository extends DefaultRepository{
 
     public Author getAuthorById(int id) {
-        String sql = String.format("SELECT * FROM author WHERE id = %d", id);
+        String sql = String.format("SELECT * FROM authors WHERE id = %d", id);
 
         try {
             ResultSet result = statement.executeQuery(sql);
             if (result.next()) {
                 return new Author(
                         result.getInt("id"),
-                        result.getString("firstname"),
-                        result.getString("lastname"),
-                        result.getDate("birthdate"));
+                        result.getString("first_name"),
+                        result.getString("last_name"),
+                        result.getDate("birth_date"));
             }
             return null;
         } catch (SQLException e) {

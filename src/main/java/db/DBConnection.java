@@ -14,7 +14,7 @@ public class DBConnection {
             e.printStackTrace();
         }
         try {
-            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "imueaa0131");
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "20040311");
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -2,6 +2,8 @@ import dto.BookDTO;
 import service.BookService;
 import service.LoginService;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 import static helper.Global.*;
 
@@ -15,20 +17,25 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        if (loginService.login()) {
-            System.out.println("Tilni tanlang: \n1. Uz \n2. Ru");
-            lang = scanner.nextInt() == 2 ? "ru" : "uz";
-
-            if (lang.equals("uz")) {
-                System.out.print("Kitob ID sini kiriting: ");
-            } else {
-                System.out.println("Введите ID вашей книги");
-            }
-            int id = scanner.nextInt();
-            BookDTO bookDTO = bookService.getBookById(id, lang);
-            System.out.println(bookDTO == null ? (lang.equals("uz") ? "Bunday kitob topilmadi" : "книга не найдена") : bookDTO);
-
+        System.out.println("Tilni tanlang: 1. O'zbekcha   2. Inglizcha\n" +
+                "Choose a language: 1. Uzbek   2. English");
+        int lang = scanner.nextInt();
+        scanner.nextLine();
+        if(lang == 1){
+            locale = new Locale("uz", "UZ");
+        }else{
+            locale = new Locale("en", "US");
         }
+        bundle = ResourceBundle.getBundle("message",locale);
 
+        System.out.println(bundle.getString("welcome"));
+
+        if(loginService.login()){
+
+            System.out.println(bundle.getString("book.enter"));
+            int id = scanner.nextInt();
+            BookDTO bookDTO = bookService.getBookById(id);
+            System.out.println(bookDTO == null  ? (bundle.getString("book.not.found")): bookDTO);
+        }
     }
 }

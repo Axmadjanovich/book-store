@@ -12,9 +12,9 @@ public class UsersRepository extends DefaultRepository{
         String query = String.format(
                 "select " +
                 "id, " +
-                "firstname, " +
-                "lastname, " +
-                "phonenumber, " +
+                "first_name, " +
+                "last_name, " +
+                "phone_number, " +
                 "account::numeric::double precision as account, " +
                 "password, " +
                 "username " +
@@ -24,9 +24,9 @@ public class UsersRepository extends DefaultRepository{
             ResultSet resultSet = statement.executeQuery(query);
             if (resultSet.next()){
                 return new User(resultSet.getInt("id"),
-                        resultSet.getString("firstname"),
-                        resultSet.getString("lastname"),
-                        resultSet.getString("phonenumber"),
+                        resultSet.getString("first_name"),
+                        resultSet.getString("last_name"),
+                        resultSet.getString("phone_number"),
                         resultSet.getDouble("account"),
                         resultSet.getString("password"),
                         resultSet.getString("username"));
@@ -42,9 +42,9 @@ public class UsersRepository extends DefaultRepository{
         String query = String.format(
                 "select " +
                 "id, " +
-                "firstname, " +
-                "lastname, " +
-                "phonenumber, " +
+                "first_name, " +
+                "last_name, " +
+                "phone_number, " +
                 "account::numeric::double precision as account, " +
                 "password, " +
                 "username " +
@@ -54,9 +54,9 @@ public class UsersRepository extends DefaultRepository{
             ResultSet resultSet = statement.executeQuery(query);
             if (resultSet.next()){
                 return new User(resultSet.getInt("id"),
-                        resultSet.getString("firstname"),
-                        resultSet.getString("lastname"),
-                        resultSet.getString("phonenumber"),
+                        resultSet.getString("first_name"),
+                        resultSet.getString("last_name"),
+                        resultSet.getString("phone_number"),
                         resultSet.getDouble("account"),
                         resultSet.getString("password"),
                         resultSet.getString("username"));
@@ -71,7 +71,7 @@ public class UsersRepository extends DefaultRepository{
     public User addUser(User user){
         String query = String.format(
                 "insert into users " +
-                "(firstname, lastname, phonenumber, password, username) " +
+                "(first_name, last_name, phone_number, password, username) " +
                 "values ('%s', '%s', '%s', '%s', '%s')",
                 user.getFirstName(),
                 user.getLastName(),

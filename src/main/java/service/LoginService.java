@@ -17,9 +17,9 @@ public class LoginService {
     public boolean login(){
         int count = 0;
         while (count< 3) {
-            System.out.print("Usernameni kiriting: ");
+            System.out.print(bundle.getString("user.username"));
             String login = scanner.nextLine();
-            System.out.print("Parolni kiriting: ");
+            System.out.print(bundle.getString("user.password"));
             String password = scanner.nextLine();
 
             User user = usersRepository.findUserByUsernameAndPassword(login, password);
@@ -28,34 +28,35 @@ public class LoginService {
                 return true;
             }
             else {
-                System.out.println("Parol yoki username noto'g'ri. Qaytadan kiriting, " + (2-count) + " ta urinish qoldi");
+                System.out.printf(bundle.getString("try.count")+"\n",2-count);
                 count++;
             }
         }
 
-        System.out.println("Registratsiyadan o'tasizmi? 1. Ha, 2. Yo'q");
+        System.out.println(bundle.getString("registration"));
         int choice = scanner.nextInt();
         if (choice == 1) {
             scanner.nextLine();
-            System.out.print("Ismingizni kiriting: ");
+            System.out.print(bundle.getString("first.name"));
             String firstName = scanner.nextLine();
-            System.out.print("Familyangizni kiriting: ");
+            System.out.print(bundle.getString("last.name"));
             String lastName = scanner.nextLine();
-            System.out.println("Tel. raqamingiz kiriting: ");
+            System.out.print(bundle.getString("phone.number"));
             String phone = scanner.nextLine();
-            System.out.println("Username kiriting: ");
+            System.out.print(bundle.getString("user.name"));
             String username = scanner.nextLine();
             while (usersRepository.findUserByUsername(username) != null) {
-                System.out.println("Username allaqachon kiritilgan. Iltimos, boshqa username kiriting: ");
+                System.out.print(bundle.getString("username.not.found"));
+                username = scanner.nextLine();
             }
-            System.out.println("Password kiriting: ");
+            System.out.print(bundle.getString("password1"));
             String password1 = scanner.nextLine();
-            System.out.println("Passwordni tasdiqlang: ");
+            System.out.print(bundle.getString("password2"));
             String password2 = scanner.nextLine();
             while (!password1.equals(password2)) {
-                System.out.println("Passwordlar mos kelmayapti. Iltimos, qaytadan kiriting: ");
+                System.out.print(bundle.getString("password.not.equals"));
                 password1 = scanner.nextLine();
-                System.out.println("Passwordni tasdiqlang: ");
+                System.out.print(bundle.getString("password2"));
                 password2 = scanner.nextLine();
             }
             User user = new User(firstName, lastName, phone,  password1, username);
