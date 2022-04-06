@@ -1,4 +1,3 @@
-import dao.User;
 import dto.BookDTO;
 import service.BookService;
 import service.LoginService;
@@ -16,15 +15,20 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Scanner scanner =  new Scanner(System.in);
-        System.out.print("Usernameni kiriting: ");
-        String login = scanner.nextLine();
-        System.out.print("Parolni kiriting: ");
-        String password = scanner.nextLine();
-        if (loginService.login(login, password)) {
+        if (loginService.login()) {
+            System.out.println("Tilni tanlang: \n1. Uz \n2. Ru");
+            lang = scanner.nextInt() == 2 ? "ru" : "uz";
 
-        }else {
-            System.out.println("Username yoki parol xato");
+            if (lang.equals("uz")) {
+                System.out.print("Kitob ID sini kiriting: ");
+            } else {
+                System.out.println("Введите ID вашей книги");
+            }
+            int id = scanner.nextInt();
+            BookDTO bookDTO = bookService.getBookById(id, lang);
+            System.out.println(bookDTO == null ? (lang.equals("uz") ? "Bunday kitob topilmadi" : "книга не найдена") : bookDTO);
+
         }
+
     }
 }

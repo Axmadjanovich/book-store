@@ -9,7 +9,6 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @RequiredArgsConstructor
-@ToString
 public class Book {
     @NonNull
     private Integer id;
